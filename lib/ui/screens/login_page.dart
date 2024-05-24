@@ -1,33 +1,33 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
+import 'package:coffee_shop_app/ui/components/bottom_nav.dart';
 import 'package:coffee_shop_app/ui/components/header_text.dart';
 import 'package:coffee_shop_app/ui/components/my_button.dart';
 import 'package:coffee_shop_app/ui/components/text_field.dart';
-import 'package:coffee_shop_app/ui/screens/loading_splash.dart';
-import 'package:coffee_shop_app/ui/screens/login_page.dart';
+import 'package:coffee_shop_app/ui/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterState extends State<Register> {
+class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isObscure = false;
 
-  void register() {
+  void login() {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const LoadingSplashPage()));
+        MaterialPageRoute(builder: (context) => const BottomNav()));
   }
 
-  void moveToLoginPage() {
+  void moveToRegisterPage() {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const LoginPage()));
+        MaterialPageRoute(builder: (context) => const Register()));
   }
 
   @override
@@ -70,7 +70,7 @@ class _RegisterState extends State<Register> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // sign up text
-                    const HeaderText(text: 'Sign up'),
+                    const HeaderText(text: 'Login in',),
 
                     const SizedBox(
                       height: 10,
@@ -78,7 +78,7 @@ class _RegisterState extends State<Register> {
 
                     // text description
                     const Text(
-                      'We are so excited you’re ready to become apart of our coffee network! don’t forget  check out your perks!',
+                      'It’s coffee time! Login and lets get all the coffee in the world! Or at least iced coffee. ',
                       style: TextStyle(
                         color: Colors.brown,
                         fontSize: 16,
@@ -109,24 +109,6 @@ class _RegisterState extends State<Register> {
                         const SizedBox(
                           height: 20,
                         ),
-
-                        // email
-                        Text(
-                          'Email Address',
-                          style: TextStyle(color: customColors?.green),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        MyTextfield(
-                            controller: emailController,
-                            hintText: 'Enter email',
-                            obscureText: false),
-
-                        const SizedBox(
-                          height: 20,
-                        ),
-
                         // password
                         Text(
                           'Password',
@@ -152,37 +134,35 @@ class _RegisterState extends State<Register> {
                         ),
 
                         const SizedBox(
-                          height: 25,
+                          height: 50,
                         ),
 
                         // register button
                         MyButton(
                             onTap: () {
-                              register();
+                              login();
                             },
-                            text: 'Register'),
+                            text: 'Login',),
 
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 8,
                         ),
 
                         Center(
                           child: Text(
-                            'Already have an account?',
+                            "Don't have an account?",
                             style: TextStyle(color: customColors?.brown),
                           ),
                         ),
 
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20,),
 
                         // sign in button
                         MyButton(
                             onTap: () {
-                              moveToLoginPage();
+                              moveToRegisterPage();
                             },
-                            text: 'Sign in'),
+                            text: 'Create an account'),
 
                         const SizedBox(
                           height: 20,
