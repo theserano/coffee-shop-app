@@ -44,9 +44,10 @@ class _BottomNavState extends State<BottomNav> {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
           height: 65,
-          backgroundColor: Colors.black54,
+          backgroundColor: customColors!.green,
           color: Colors.white,
           animationDuration: const Duration(milliseconds: 200),
+          animationCurve: Curves.bounceInOut,
           onTap: (int index) {
             setState(() {
               currentIndex = index;
@@ -55,15 +56,15 @@ class _BottomNavState extends State<BottomNav> {
           items: [
             Icon(
               Icons.home_outlined,
-              color: customColors?.brown,
+              color: customColors.green,
             ),
             Icon(
               Icons.qr_code_2_outlined,
-              color: customColors?.brown,
+              color: customColors.green,
             ),
-            Icon(Icons.shopping_bag_outlined, color: customColors?.brown),
-            Icon(Icons.person_2_outlined, color: customColors?.brown),
-            Icon(Icons.star_border_outlined, color: customColors?.brown)
+            Icon(Icons.shopping_bag_outlined, color: customColors.green),
+            Icon(Icons.person_2_outlined, color: customColors.green),
+            Icon(Icons.star_border_outlined, color: customColors.green)
           ]),
       body: pages[currentIndex],
     );

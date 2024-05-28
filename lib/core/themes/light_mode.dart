@@ -10,7 +10,8 @@ ThemeData lightMode = ThemeData(
       lightBrown: Color.fromRGBO(166, 124, 82, 1.0),
       green: Color.fromRGBO(78, 141, 124, 1.0),
       black: Color.fromRGBO(39, 39, 39, 1.0),
-      white: Color.fromRGBO(209, 209, 209, 1),
+      white: Colors.white,
+      textColor: Colors.black,
       background: Color.fromRGBO(250, 240, 232, 1)
     )
   ]

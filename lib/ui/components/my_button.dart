@@ -23,7 +23,7 @@ class MyButton extends StatelessWidget {
             text,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: customColors?.white,
+                color: customColors?.background,
                 fontSize: 16),
           ),
         ),

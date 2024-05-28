@@ -10,8 +10,9 @@ ThemeData darkMode = ThemeData(
       lightBrown: Color.fromRGBO(140, 106, 79, 1.0),
       green: Color.fromRGBO(60, 114, 102, 1.0),
       black: Color.fromRGBO(46, 42, 39, 1.0),
-      white: Colors.white,
-      background: Color.fromARGB(137, 25, 25, 25)
+      white: Colors.black54,
+      textColor: Colors.white,
+      background: Colors.black
     )
   ]
 );

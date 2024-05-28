@@ -9,16 +9,17 @@ class CustomColors extends ThemeExtension<CustomColors> {
   final Color black;
   final Color white;
   final Color background;
+  final Color textColor;
 
-  const CustomColors({
-    required this.brown,
-    required this.cream,
-    required this.lightBrown,
-    required this.green,
-    required this.black,
-    required this.white,
-    required this.background
-  });
+  const CustomColors(
+      {required this.brown,
+      required this.cream,
+      required this.lightBrown,
+      required this.green,
+      required this.black,
+      required this.white,
+      required this.background,
+      required this.textColor});
 
   @override
   CustomColors copyWith({
@@ -29,6 +30,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
     Color? black,
     Color? white,
     Color? background,
+    Color? textColor
   }) {
     return CustomColors(
         brown: brown ?? this.brown,
@@ -37,7 +39,8 @@ class CustomColors extends ThemeExtension<CustomColors> {
         green: green ?? this.green,
         black: black ?? this.black,
         white: white ?? this.white,
-        background: white ?? this.background);
+        background: background ?? this.background,
+        textColor: textColor ?? this.textColor);
   }
 
   @override
@@ -52,6 +55,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
         green: Color.lerp(green, other.green, t)!,
         black: Color.lerp(black, other.black, t)!,
         white: Color.lerp(white, other.white, t)!,
-        background: Color.lerp(background, other.background, t)!);
+        background: Color.lerp(background, other.background, t)!,
+        textColor: Color.lerp(textColor, other.textColor, t)!);
   }
 }

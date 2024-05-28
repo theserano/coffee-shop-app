@@ -11,8 +11,8 @@ class HeaderText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        color: customColors?.white,
-          fontSize: 28,
+        color: customColors?.textColor,
+          fontSize: 26,
           fontWeight: FontWeight.w700,
           fontFamily: 'poppins'
       ),

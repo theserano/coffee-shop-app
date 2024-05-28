@@ -81,12 +81,12 @@ class _OnboardingState extends State<Onboarding> {
                             Text(
                               contents[i].title,
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold, color: customColors?.white),
+                                  fontSize: 20, fontWeight: FontWeight.bold, color: customColors?.textColor),
                             ),
                             const SizedBox(
                               height: 20,
                             ),
-                            Text(contents[i].description, style: TextStyle(color: customColors?.white),)
+                            Text(contents[i].description, style: TextStyle(color: customColors?.textColor),)
                           ],
                         ),
                       );
@@ -120,7 +120,7 @@ class _OnboardingState extends State<Onboarding> {
                     child: Text(
                       'Next',
                       style: TextStyle(
-                          color: customColors?.white,
+                          color: customColors?.textColor,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
