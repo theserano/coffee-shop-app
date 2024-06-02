@@ -1,6 +1,6 @@
+import 'package:coffee_shop_app/data/models/shop.dart';
 import 'package:coffee_shop_app/data/providers/theme_provider.dart';
 import 'package:coffee_shop_app/ui/components/bottom_nav.dart';
-import 'package:coffee_shop_app/ui/screens/order.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +9,7 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ChangeNotifierProvider(create: (context) => Shop())
     ],
     child: const MyApp(),
   ));
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: themeProvider.themeData,
-          home: const OrderPage(),
+          home: const BottomNav(),
         );
       },
     );

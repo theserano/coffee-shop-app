@@ -8,7 +8,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+  final int pageIndex;
+  const BottomNav({super.key, this.pageIndex = 0});
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -34,6 +35,7 @@ class _BottomNavState extends State<BottomNav> {
     const accountPage = AccountPage();
 
     pages = [homePage, scanPage, orderPage, accountPage, rewardsPage];
+    currentIndex = widget.pageIndex;
 
     super.initState();
   }
@@ -43,6 +45,7 @@ class _BottomNavState extends State<BottomNav> {
     final customColors = Theme.of(context).extension<CustomColors>();
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
+        index: currentIndex,
           height: 65,
           backgroundColor: customColors!.green,
           color: Colors.white,

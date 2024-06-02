@@ -1,8 +1,9 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/data/models/drinks.dart';
 import 'package:coffee_shop_app/data/models/shop.dart';
-import 'package:coffee_shop_app/ui/components/dinrk_tile.dart';
+import 'package:coffee_shop_app/ui/components/drink_tile.dart';
 import 'package:coffee_shop_app/ui/components/my_drawer.dart';
+import 'package:coffee_shop_app/ui/screens/details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -17,13 +18,18 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   GridView getShopMenu(List<Drink> fullMenu) {
     return GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // Number of columns
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 4.0,
+      padding: const EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 30),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 20.0,
+          mainAxisSpacing: 20.0,
         ),
+        itemCount: fullMenu.length,
         itemBuilder: (BuildContext context, int index) =>
-            DrinkTile(drink: fullMenu, onTap: () {}));
+            DrinkTile(drink: fullMenu[index], onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Details(drink: fullMenu[index])));
+            }));
   }
 
   @override
@@ -62,11 +68,24 @@ class _OrderPageState extends State<OrderPage> {
         ),
       ),
       drawer: const MyDrawer(),
-      body: Container(
-        color: customColors?.background,
-        child: Consumer<Shop>(
-          builder: (context, shop, child) => getShopMenu(shop.menu),
-        ),
+      body: Column(
+        children:[
+          Container(
+            width: double.infinity,
+            color: customColors?.background,
+            padding: const EdgeInsets.only(top: 50, left: 10),
+            child: const Text('Drinks', style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold,),),
+          ),
+          Expanded(
+            child: Container(
+            color: customColors?.background,
+            child: Consumer<Shop>(
+              builder: (context, shop, child) => getShopMenu(shop.menu),
+            ),
+                    ),
+          ),
+        ] 
       ),
     );
   }
