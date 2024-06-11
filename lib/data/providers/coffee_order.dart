@@ -2,7 +2,7 @@ import 'package:coffee_shop_app/data/models/coffee_order.dart';
 import 'package:flutter/material.dart';
 
 class Coffee extends ChangeNotifier {
-  List <CoffeeOrder> _orders = [];
+  final List <CoffeeOrder> _orders = [];
 
   List<CoffeeOrder> get orders => _orders;
 

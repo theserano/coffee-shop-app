@@ -1,4 +1,5 @@
-import 'package:coffee_shop_app/data/models/shop.dart';
+import 'package:coffee_shop_app/data/providers/shop.dart';
+import 'package:coffee_shop_app/data/providers/coffee_order.dart';
 import 'package:coffee_shop_app/data/providers/theme_provider.dart';
 import 'package:coffee_shop_app/ui/components/bottom_nav.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => ThemeProvider()),
-      ChangeNotifierProvider(create: (context) => Shop())
+      ChangeNotifierProvider(create: (context) => Shop()),
+      ChangeNotifierProvider(create: (context) => Coffee())
     ],
     child: const MyApp(),
   ));

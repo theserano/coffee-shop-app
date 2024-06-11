@@ -1,5 +1,6 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/ui/components/header_text.dart';
+import 'package:coffee_shop_app/ui/components/my_appbar.dart';
 import 'package:coffee_shop_app/ui/components/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,34 +17,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final customColors = Theme.of(context).extension<CustomColors>();
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70),
-        child: AppBar(
-          elevation: 5,
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
-                iconSize: 35,
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              );
-            },
-          ),
-          actions: [
-            SvgPicture.asset(
-              'lib/assets/container.svg',
-              semanticsLabel: 'coffee cup',
-            ),
-            SizedBox(width: MediaQuery.of(context).size.width / 3.2,),
-            IconButton(
-              onPressed: () {},
-              iconSize: 35,
-              icon: const Icon(Icons.shopping_bag_outlined),
-            ),
-          ],
-        ),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child:  MyAppBar(),
       ),
       drawer: const MyDrawer(),
       body: Container(
@@ -87,10 +63,11 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            const SizedBox(height: 30,),
 
             // bonus rewards
             Container(
-              padding: const EdgeInsets.all(25),
+              padding: const EdgeInsets.all(20),
               child: Stack(
                 children: [
                   Material(
@@ -185,16 +162,16 @@ class _HomePageState extends State<HomePage> {
             ),
 
             // Favorites section
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  HeaderText(text: 'Your favorites'),
-                ],
-              ),
-            ),
-            const SizedBox(height: 30,)
+            // const Padding(
+            //   padding: EdgeInsets.all(8.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     children: [
+            //       HeaderText(text: 'Your favorites'),
+            //     ],
+            //   ),
+            // ),
+            const SizedBox(height: 100,)
 
           ]
         ),

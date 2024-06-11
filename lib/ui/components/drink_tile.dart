@@ -1,7 +1,6 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/data/models/drinks.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 
 class DrinkTile extends StatelessWidget {
@@ -15,19 +14,22 @@ class DrinkTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Material(
-        elevation: 3.0,
+        elevation: 4.0,
         borderRadius: BorderRadius.circular(8),
         child: Container(
           width: 80.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: customColors?.white,
+            color: customColors?.background,
           ),
           child: Column(
             children: [
-              Image.asset(drink.imagePath, fit: BoxFit.cover, width: 100.0,),
+              Opacity(
+                opacity: 0.8,
+                child: Image.asset(drink.imagePath, fit: BoxFit.cover, width: 100.0,)
+              ),
               const Spacer(),
-              Text(drink.name),
+              Text(drink.name, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),),
               const SizedBox(height: 10.0,)
             ],
           ),

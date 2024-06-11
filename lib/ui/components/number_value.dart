@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 class NumberValue extends StatefulWidget {
   final String label;
   final String text;
   final ValueChanged<String>? onAmountChange;
 
-  const NumberValue(
-      {super.key,
-      required this.label,
-      required this.text,
-      this.onAmountChange});
+  const NumberValue({
+    super.key,
+    required this.label,
+    required this.text,
+    this.onAmountChange,
+  });
 
   @override
   State<NumberValue> createState() => _NumberValueState();
@@ -19,6 +18,39 @@ class NumberValue extends StatefulWidget {
 
 class _NumberValueState extends State<NumberValue> {
   TextEditingController amountController = TextEditingController(text: "0");
+
+  @override
+  void initState() {
+    super.initState();
+    amountController = TextEditingController(text: "0");
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onAmountChange!('0');
+    });
+  }
+
+  void increment() {
+    int currentValue = int.parse(amountController.text);
+    setState(() {
+      currentValue++;
+      amountController.text = currentValue.toString();
+      if (widget.onAmountChange != null) {
+        widget.onAmountChange!(currentValue.toString());
+      }
+    });
+  }
+
+  void decrement() {
+    int currentValue = int.parse(amountController.text);
+    setState(() {
+      if (currentValue > 0) {
+        currentValue--;
+        amountController.text = currentValue.toString();
+        if (widget.onAmountChange != null) {
+          widget.onAmountChange!(currentValue.toString());
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +61,10 @@ class _NumberValueState extends State<NumberValue> {
         children: [
           Container(
             padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 20.0),
-            child: Text(widget.label,
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            child: Text(
+              widget.label,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
           ),
           Container(
             padding: const EdgeInsets.all(10.0),
@@ -46,9 +79,11 @@ class _NumberValueState extends State<NumberValue> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(widget.text,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 16)),
+                    Text(
+                      widget.text,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 16),
+                    ),
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black12),
@@ -57,7 +92,10 @@ class _NumberValueState extends State<NumberValue> {
                       child: Row(
                         children: [
                           IconButton(
-                              onPressed: () {}, icon: const Icon(Icons.add), color: Colors.red[900],),
+                            onPressed: increment,
+                            icon: const Icon(Icons.add),
+                            color: Colors.red[900],
+                          ),
                           SizedBox(
                             width: 40,
                             height: 30,
@@ -67,14 +105,18 @@ class _NumberValueState extends State<NumberValue> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                contentPadding: const EdgeInsets.only(bottom: 6.0),
+                                contentPadding:
+                                    const EdgeInsets.only(bottom: 6.0),
                               ),
                               textAlign: TextAlign.center,
                               onChanged: widget.onAmountChange,
                             ),
                           ),
                           IconButton(
-                              onPressed: () {}, icon: const Icon(Icons.remove), color: Colors.red[900],),
+                            onPressed: decrement,
+                            icon: const Icon(Icons.remove),
+                            color: Colors.red[900],
+                          ),
                         ],
                       ),
                     ),
@@ -82,7 +124,7 @@ class _NumberValueState extends State<NumberValue> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

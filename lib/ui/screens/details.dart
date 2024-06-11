@@ -1,10 +1,15 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
+import 'package:coffee_shop_app/data/models/coffee_order.dart';
 import 'package:coffee_shop_app/data/models/drinks.dart';
+import 'package:coffee_shop_app/data/providers/coffee_order.dart';
 import 'package:coffee_shop_app/ui/components/bottom_nav.dart';
 import 'package:coffee_shop_app/ui/components/dropdown_button.dart';
 import 'package:coffee_shop_app/ui/components/number_value.dart';
+import 'package:coffee_shop_app/ui/screens/order.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class Details extends StatefulWidget {
   final Drink drink;
@@ -20,6 +25,8 @@ class _DetailsState extends State<Details> {
 
   String? stateCupSize;
   String? stateAddIn;
+  String? stateSweetenerAmount;
+  String? stateFlavourAmount;
 
   @override
   void initState() {
@@ -35,6 +42,47 @@ class _DetailsState extends State<Details> {
     setState(() {
       stateAddIn = newAddIn;
     });
+  }
+  void handleSweetenerAmountChange(String? newSweetenerAmount){
+    setState(() {
+      stateSweetenerAmount = newSweetenerAmount;
+    });
+  }
+  void handleFlavourAmountChange(String? newFlavourAmount){
+    setState(() {
+      stateFlavourAmount = newFlavourAmount;
+    });
+  }
+
+  void getCoffeeOrders() {
+    try {
+     if (stateCupSize != null &&
+          stateAddIn != null &&
+          stateFlavourAmount != null &&
+          stateSweetenerAmount != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          context.read<Coffee>().addOrder(CoffeeOrder(
+              drink: widget.drink,
+              cupSize: stateCupSize,
+              addIns: stateAddIn,
+              sweetener: stateSweetenerAmount,
+              flavour: stateFlavourAmount));
+        });
+        _resetState();
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderPage()));
+      } 
+    } catch (e) {
+      if(kDebugMode){
+        print(e);
+      }
+    }
+  }
+
+  void _resetState() {
+    stateCupSize = null;
+    stateAddIn = null;
+    stateSweetenerAmount = null;
+    stateFlavourAmount = null;
   }
 
   @override
@@ -123,7 +171,8 @@ class _DetailsState extends State<Details> {
               children: [
                 DropdownOrderMenu(dropDownItems: cupSize, label: 'Cup Size', onItemSelected: _handleCupSizeChange,),
                 DropdownOrderMenu(dropDownItems: addIns, label: 'Add Ins', onItemSelected: _handleAddIneChange,),
-                NumberValue(label: 'Sweetener', text: 'Splenda packet',)
+                NumberValue(label: 'Sweetener', text: 'Splenda packet', onAmountChange: handleSweetenerAmountChange,),
+                NumberValue(label: 'Flavour', text: 'Pumpkin spice', onAmountChange: handleFlavourAmountChange,),
               ],
             ),
             const SizedBox(
@@ -136,18 +185,17 @@ class _DetailsState extends State<Details> {
                       color: customColors?.green,
                       borderRadius: BorderRadius.circular(8)),
                   child: TextButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {getCoffeeOrders();},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Next', style: TextStyle(fontSize: 21, color: customColors?.white, fontWeight: FontWeight.w400),),
+                        Text('Add to cart', style: TextStyle(fontSize: 21, color: customColors?.white, fontWeight: FontWeight.w400),),
                       ],
                     ),
                   )),
             ),
             const SizedBox(
-              height: 20.0,
+              height: 30.0,
             ),
           ],
         ),

@@ -1,7 +1,8 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/data/models/drinks.dart';
-import 'package:coffee_shop_app/data/models/shop.dart';
+import 'package:coffee_shop_app/data/providers/shop.dart';
 import 'package:coffee_shop_app/ui/components/drink_tile.dart';
+import 'package:coffee_shop_app/ui/components/my_appbar.dart';
 import 'package:coffee_shop_app/ui/components/my_drawer.dart';
 import 'package:coffee_shop_app/ui/screens/details.dart';
 import 'package:flutter/material.dart';
@@ -41,54 +42,28 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     final customColors = Theme.of(context).extension<CustomColors>();
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70),
-        child: AppBar(
-          elevation: 5,
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
-                iconSize: 35,
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              );
-            },
-          ),
-          actions: [
-            SvgPicture.asset(
-              'lib/assets/container.svg',
-              semanticsLabel: 'coffee cup',
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 3.2,
-            ),
-            IconButton(
-              onPressed: () {},
-              iconSize: 35,
-              icon: const Icon(Icons.shopping_bag_outlined),
-            ),
-          ],
-        ),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child:  MyAppBar(),
       ),
       drawer: const MyDrawer(),
       body: Column(children: [
         Container(
           width: double.infinity,
-          color: customColors?.background,
+          color: customColors?.white,
           padding: const EdgeInsets.only(top: 50, left: 10),
           child: const Text(
             'Drinks',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 23,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
+        const SizedBox(height: 20,),
         Expanded(
           child: Container(
-            color: customColors?.background,
+            color: customColors?.white,
             child: Consumer<Shop>(
               builder: (context, shop, child) => getShopMenu(shop.menu),
             ),
