@@ -2,6 +2,7 @@ import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/data/models/drinks.dart';
 import 'package:coffee_shop_app/ui/components/bottom_nav.dart';
 import 'package:coffee_shop_app/ui/components/dropdown_button.dart';
+import 'package:coffee_shop_app/ui/components/number_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -14,10 +15,27 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-
   final List<String> cupSize = ['Large', 'Normal', 'Small'];
   final List<String> addIns = ['Normal Ice', 'Large Ice', 'Cream'];
 
+  String? stateCupSize;
+  String? stateAddIn;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _handleCupSizeChange(String? newCupSize){
+    setState(() {
+      stateCupSize = newCupSize;
+    });
+  }
+  void _handleAddIneChange(String? newAddIn){
+    setState(() {
+      stateAddIn = newAddIn;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +106,8 @@ class _DetailsState extends State<Details> {
               height: 20.0,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0, left: 20.0, bottom: 10.0),
+              padding:
+                  const EdgeInsets.only(top: 20.0, left: 20.0, bottom: 10.0),
               child: Text(
                 "What's included",
                 style: TextStyle(
@@ -100,10 +119,36 @@ class _DetailsState extends State<Details> {
             const SizedBox(
               height: 20.0,
             ),
-            Column(children: [
-              DropdownOrderMenu(dropDownItems: cupSize, label: 'Cup Size'),
-              DropdownOrderMenu(dropDownItems: addIns, label: 'Add Ins'),
-            ],)
+            Column(
+              children: [
+                DropdownOrderMenu(dropDownItems: cupSize, label: 'Cup Size', onItemSelected: _handleCupSizeChange,),
+                DropdownOrderMenu(dropDownItems: addIns, label: 'Add Ins', onItemSelected: _handleAddIneChange,),
+                NumberValue(label: 'Sweetener', text: 'Splenda packet',)
+              ],
+            ),
+            const SizedBox(
+              height: 50.0,
+            ),
+            Center(
+              child: Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  decoration: BoxDecoration(
+                      color: customColors?.green,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextButton(
+                    onPressed: () {
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Next', style: TextStyle(fontSize: 21, color: customColors?.white, fontWeight: FontWeight.w400),),
+                      ],
+                    ),
+                  )),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
           ],
         ),
       ),

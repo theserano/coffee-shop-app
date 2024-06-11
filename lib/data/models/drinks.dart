@@ -8,5 +8,5 @@ class Drink {
       {required this.name,
       required this.imagePath,
       required this.description,
-      required this.price});
+      required this.price,});
 }
