@@ -23,32 +23,32 @@ class _DetailsState extends State<Details> {
   final List<String> cupSize = ['Large', 'Normal', 'Small'];
   final List<String> addIns = ['Normal Ice', 'Large Ice', 'Cream'];
 
-  String? stateCupSize;
-  String? stateAddIn;
-  String? stateSweetenerAmount;
-  String? stateFlavourAmount;
+  String stateCupSize = '';
+  String stateAddIn = '';
+  String stateSweetenerAmount = '';
+  String stateFlavourAmount = '';
 
   @override
   void initState() {
     super.initState();
   }
 
-  void _handleCupSizeChange(String? newCupSize){
+  void _handleCupSizeChange(String newCupSize){
     setState(() {
       stateCupSize = newCupSize;
     });
   }
-  void _handleAddIneChange(String? newAddIn){
+  void _handleAddIneChange(String newAddIn){
     setState(() {
       stateAddIn = newAddIn;
     });
   }
-  void handleSweetenerAmountChange(String? newSweetenerAmount){
+  void handleSweetenerAmountChange(String newSweetenerAmount){
     setState(() {
       stateSweetenerAmount = newSweetenerAmount;
     });
   }
-  void handleFlavourAmountChange(String? newFlavourAmount){
+  void handleFlavourAmountChange(String newFlavourAmount){
     setState(() {
       stateFlavourAmount = newFlavourAmount;
     });
@@ -56,34 +56,30 @@ class _DetailsState extends State<Details> {
 
   void getCoffeeOrders() {
     try {
-     if (stateCupSize != null &&
-          stateAddIn != null &&
-          stateFlavourAmount != null &&
-          stateSweetenerAmount != null) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           context.read<Coffee>().addOrder(CoffeeOrder(
-              drink: widget.drink,
-              cupSize: stateCupSize,
-              addIns: stateAddIn,
-              sweetener: stateSweetenerAmount,
-              flavour: stateFlavourAmount));
+                drink: widget.drink,
+                cupSize: stateCupSize,
+                addIns: stateAddIn,
+                sweetener: stateSweetenerAmount,
+                flavour: stateFlavourAmount,
+              ));
         });
-        _resetState();
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderPage()));
-      } 
+        if (kDebugMode) {
+          print(stateCupSize);
+          print(stateAddIn);
+          print(stateSweetenerAmount);
+          print(stateFlavourAmount);
+        }
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const OrderPage()));
     } catch (e) {
-      if(kDebugMode){
+      if (kDebugMode) {
         print(e);
       }
     }
   }
-
-  void _resetState() {
-    stateCupSize = null;
-    stateAddIn = null;
-    stateSweetenerAmount = null;
-    stateFlavourAmount = null;
-  }
+  
 
   @override
   Widget build(BuildContext context) {

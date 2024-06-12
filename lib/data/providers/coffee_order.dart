@@ -15,4 +15,9 @@ class Coffee extends ChangeNotifier {
     _orders.remove(order);
     notifyListeners();
   }
+
+  void clearOrder(){
+    _orders.clear();
+    notifyListeners();
+  }
 }
