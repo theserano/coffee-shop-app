@@ -20,11 +20,11 @@ class _MyDrawerState extends State<MyDrawer> {
           ListTile(
             title: Text(
               'Log out',
-              style: TextStyle(color: customColors?.lightBrown),
+              style: TextStyle(color: customColors?.white),
             ),
             leading:  Icon(
               Icons.logout_outlined,
-              color: customColors?.lightBrown,
+              color: customColors?.white,
             ),
             onTap: () {},
           ),

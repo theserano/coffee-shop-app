@@ -25,10 +25,10 @@ class _CartItemState extends State<CartItem> {
   Widget build(BuildContext context) {
     final customColors = Theme.of(context).extension<CustomColors>();
     return Container(
-      margin: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
+      margin: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        border: Border.all(color: customColors!.brown, width: 2.0),
+        // border: Border.all(color: customColors!.brown, width: 2.0),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -40,7 +40,7 @@ class _CartItemState extends State<CartItem> {
               Text(
                 widget.coffee.drink.name,
                 style:
-                    TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: customColors.lightBrown),
+                    TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: customColors?.lightBrown),
               ),
               Text(
                 '\$${widget.coffee.drink.price}',
@@ -50,27 +50,27 @@ class _CartItemState extends State<CartItem> {
           ),
           const SizedBox(height: 8),
           Row(children: [
-            Text('Description', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors.lightBrown),),
+            Text('Description', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
             Text(widget.coffee.drink.description, style: const TextStyle(fontSize: 12)),
           ],),
           Row(children: [
-            Text('Cup Size', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors.lightBrown),),
+            Text('Cup Size', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
             Text(widget.coffee.cupSize, style: const TextStyle(fontSize: 12)),
           ],),
           Row(children: [
-            Text('Add Ins', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors.lightBrown),),
+            Text('Add Ins', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
             Text(widget.coffee.addIns, style: const TextStyle(fontSize: 12)),
           ],),
           Row(children: [
-            Text('Sweetener', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors.lightBrown),),
+            Text('Sweetener', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
             Text(widget.coffee.sweetener, style: const TextStyle(fontSize: 12)),
           ],),
           Row(children: [
-            Text('Flavour', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors.lightBrown),),
+            Text('Flavour', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
             Text(widget.coffee.flavour, style: const TextStyle(fontSize: 12)),
           ],),

@@ -20,4 +20,11 @@ class Coffee extends ChangeNotifier {
     _orders.clear();
     notifyListeners();
   }
+
+  String getTotalPrice() {
+    double prices =
+        _orders.fold(0.0, (sum, e) => sum + double.parse(e.drink.price));
+    return prices.toStringAsFixed(2);
+  }
+
 }

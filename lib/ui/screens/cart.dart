@@ -3,7 +3,6 @@ import 'package:coffee_shop_app/data/providers/coffee_order.dart';
 import 'package:coffee_shop_app/ui/components/bottom_nav.dart';
 import 'package:coffee_shop_app/ui/components/cart_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class Cart extends StatefulWidget {
@@ -41,6 +40,7 @@ class _CartState extends State<Cart> {
     final customColors = Theme.of(context).extension<CustomColors>();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: customColors?.background,
         elevation: 5,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined),
@@ -75,31 +75,33 @@ class _CartState extends State<Cart> {
       ),
       backgroundColor: customColors?.background,
       body: checkIfCartIsEmpty()
-          ? Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 70),
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 50, bottom: 50, left: 70, right: 70),
-                    decoration: BoxDecoration(
-                      color: customColors?.white,
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.remove_shopping_cart_rounded, size: 50, color: Colors.black38,),
-                          SizedBox(height: 10,),
-                          Text('No item in your cart', style: TextStyle(color: Colors.black54, fontSize: 16),),
-                        ],
+          ? Center(
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 70),
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 50, bottom: 50, left: 70, right: 70),
+                      decoration: BoxDecoration(
+                        color: customColors?.white,
+                        borderRadius: BorderRadius.circular(10)
                       ),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.remove_shopping_cart_rounded, size: 50, color: Colors.black38,),
+                            SizedBox(height: 10,),
+                            Text('No item in your cart', style: TextStyle(color: Colors.black54, fontSize: 16),),
+                          ],
+                        ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )
           : SingleChildScrollView(
             child: Column(
@@ -108,7 +110,35 @@ class _CartState extends State<Cart> {
                 const SizedBox(height: 40,),
                 showCoffeeOrders(context),
 
-                
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    children: [
+                      const Text('Total Price', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                      const Spacer(),
+                      Text(' \$${Provider.of<Coffee>(context, listen: false).getTotalPrice()}', style: const TextStyle(fontSize: 18),),
+                    ],
+                  ),
+                ),
+                Center(
+              child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                      color: customColors?.green,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNav(pageIndex: 1,)));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Add to cart', style: TextStyle(fontSize: 20, color: customColors?.white, fontWeight: FontWeight.w400),),
+                      ],
+                    ),
+                  )),
+            ),
               ],
             ),
           ),

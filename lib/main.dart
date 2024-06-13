@@ -1,7 +1,7 @@
 import 'package:coffee_shop_app/data/providers/shop.dart';
 import 'package:coffee_shop_app/data/providers/coffee_order.dart';
 import 'package:coffee_shop_app/data/providers/theme_provider.dart';
-import 'package:coffee_shop_app/ui/components/bottom_nav.dart';
+import 'package:coffee_shop_app/ui/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: themeProvider.themeData,
-          home: const BottomNav(),
+          home: const Register(),
         );
       },
     );
