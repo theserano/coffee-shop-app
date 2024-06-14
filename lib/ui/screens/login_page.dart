@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/ui/components/bottom_nav.dart';
 import 'package:coffee_shop_app/ui/components/header_text.dart';
 import 'package:coffee_shop_app/ui/components/my_button.dart';
 import 'package:coffee_shop_app/ui/components/text_field.dart';
 import 'package:coffee_shop_app/ui/screens/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -19,16 +22,36 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isObscure = false;
+  String email = '', password = '';
 
-  void login() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const BottomNav()));
+  void login() async{
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const BottomNav()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text(
+          'No user found',
+          style: TextStyle(fontSize: 18.0, color: Colors.black),
+        )));
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text(
+          'Wrong password provided by user',
+          style: TextStyle(fontSize: 18.0, color: Colors.black),
+        )));
+      }
+    }
   }
 
   void moveToRegisterPage() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const Register()));
   }
+  
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/ui/components/header_text.dart';
 import 'package:coffee_shop_app/ui/components/my_button.dart';
 import 'package:coffee_shop_app/ui/components/text_field.dart';
 import 'package:coffee_shop_app/ui/screens/loading_splash.dart';
 import 'package:coffee_shop_app/ui/screens/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -19,10 +22,38 @@ class _RegisterState extends State<Register> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isObscure = false;
+  String email = '', password = '', name = '';
 
-  void register() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const LoadingSplashPage()));
+  void register() async{
+      try {
+          await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+
+        ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              'Registered successfully',
+              style: TextStyle(fontSize: 20.0),
+            ))));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const LoadingSplashPage()));
+      } on FirebaseException catch (e) {
+        if (e.code == 'weak-password') {
+          ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                'Password provided is too weak',
+                style: TextStyle(fontSize: 18.0),
+              ))));
+        } else if (e.code == "email-already-in-use") {
+          ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                'Account already exists',
+                style: TextStyle(fontSize: 18.0),
+              ))));
+        }
+      }
   }
 
   void moveToLoginPage() {
@@ -158,9 +189,14 @@ class _RegisterState extends State<Register> {
                         // register button
                         MyButton(
                             onTap: () {
+                              setState(() {
+                                name = usernameController.text;
+                                email = emailController.text;
+                                password = passwordController.text;
+                              });
                               register();
                             },
-                            text: 'Register'),
+                            text: 'Click to Register'),
 
                         const SizedBox(
                           height: 20,
