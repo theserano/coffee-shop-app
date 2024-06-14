@@ -41,3 +41,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase configuration files
+# Uncomment if you don't want to include them in the repository
+ios/Runner/GoogleService-Info.plist
