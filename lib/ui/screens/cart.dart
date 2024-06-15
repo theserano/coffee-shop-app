@@ -43,7 +43,7 @@ class _CartState extends State<Cart> {
         backgroundColor: customColors?.background,
         elevation: 5,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          icon: Icon(Icons.arrow_back_ios_new_outlined, color: customColors?.textColor,),
           iconSize: 23,
           onPressed: () {
             Navigator.push(
@@ -54,9 +54,9 @@ class _CartState extends State<Cart> {
                         )));
           },
         ),
-        title: const Text(
+        title: Text(
           'Shopping cart',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: customColors?.textColor,),
         ),
         actions: [
           checkIfCartIsEmpty() ?  Container() : Row(
@@ -67,7 +67,7 @@ class _CartState extends State<Cart> {
                   // Use Provider.of with listen: false inside the event handler
                   Provider.of<Coffee>(context, listen: false).clearOrder();
                 },
-                icon: const Icon(Icons.remove_shopping_cart_rounded),
+                icon: Icon(Icons.remove_shopping_cart_rounded, color: customColors?.textColor,),
               )
             ],
           ),
@@ -114,9 +114,9 @@ class _CartState extends State<Cart> {
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
                     children: [
-                      const Text('Total Price', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                      Text('Total Price', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: customColors?.textColor),),
                       const Spacer(),
-                      Text(' \$${Provider.of<Coffee>(context, listen: false).getTotalPrice()}', style: const TextStyle(fontSize: 18),),
+                      Text(' \$${Provider.of<Coffee>(context, listen: false).getTotalPrice()}', style: TextStyle(fontSize: 18, color: customColors?.textColor),),
                     ],
                   ),
                 ),
@@ -134,7 +134,7 @@ class _CartState extends State<Cart> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Add to cart', style: TextStyle(fontSize: 20, color: customColors?.white, fontWeight: FontWeight.w400),),
+                        Text('Add to cart', style: TextStyle(fontSize: 20, color: customColors?.textColor, fontWeight: FontWeight.w400),),
                       ],
                     ),
                   )),

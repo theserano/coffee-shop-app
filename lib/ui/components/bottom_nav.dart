@@ -1,10 +1,12 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
+import 'package:coffee_shop_app/data/providers/theme_provider.dart';
 import 'package:coffee_shop_app/ui/screens/account.dart';
 import 'package:coffee_shop_app/ui/screens/home_page.dart';
 import 'package:coffee_shop_app/ui/screens/order.dart';
 import 'package:coffee_shop_app/ui/screens/scan.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomNav extends StatefulWidget {
   final int pageIndex;
@@ -44,8 +46,8 @@ class _BottomNavState extends State<BottomNav> {
       bottomNavigationBar: CurvedNavigationBar(
         index: currentIndex,
           height: 65,
-          backgroundColor: customColors!.green,
-          color: Colors.white,
+          backgroundColor: Provider.of<ThemeProvider>(context).isDarkMode ? customColors!.background : customColors!.green,
+          color: customColors.background,
           animationDuration: const Duration(milliseconds: 200),
           animationCurve: Curves.bounceInOut,
           onTap: (int index) {

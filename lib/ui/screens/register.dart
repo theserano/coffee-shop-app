@@ -28,13 +28,6 @@ class _RegisterState extends State<Register> {
       try {
           await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
-
-        ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
-            backgroundColor: Colors.redAccent,
-            content: Text(
-              'Registered successfully',
-              style: TextStyle(fontSize: 20.0),
-            ))));
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const LoadingSplashPage()));
       } on FirebaseException catch (e) {

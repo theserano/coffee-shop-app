@@ -36,7 +36,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.logout_outlined,
               color: customColors?.white,
             ),
-            onTap: () {},
+            onTap: () async{
+              await signOut();
+            },
           ),
         ],
       ),

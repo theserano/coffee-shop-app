@@ -44,7 +44,8 @@ class _CartItemState extends State<CartItem> {
               ),
               Text(
                 '\$${widget.coffee.drink.price}',
-                style: const TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16,  color: customColors?.textColor,
+                ),
               ),
             ],
           ),
@@ -52,27 +53,27 @@ class _CartItemState extends State<CartItem> {
           Row(children: [
             Text('Description', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
-            Text(widget.coffee.drink.description, style: const TextStyle(fontSize: 12)),
+            Text(widget.coffee.drink.description, style: TextStyle(fontSize: 12, color: customColors?.textColor,)),
           ],),
           Row(children: [
             Text('Cup Size', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
-            Text(widget.coffee.cupSize, style: const TextStyle(fontSize: 12)),
+            Text(widget.coffee.cupSize, style: TextStyle(fontSize: 12, color: customColors?.textColor,)),
           ],),
           Row(children: [
             Text('Add Ins', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
-            Text(widget.coffee.addIns, style: const TextStyle(fontSize: 12)),
+            Text(widget.coffee.addIns, style: TextStyle(fontSize: 12, color: customColors?.textColor,)),
           ],),
           Row(children: [
             Text('Sweetener', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
-            Text(widget.coffee.sweetener, style: const TextStyle(fontSize: 12)),
+            Text(widget.coffee.sweetener, style: TextStyle(fontSize: 12, color: customColors?.textColor,)),
           ],),
           Row(children: [
             Text('Flavour', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: customColors?.lightBrown),),
             const Spacer(),
-            Text(widget.coffee.flavour, style: const TextStyle(fontSize: 12)),
+            Text(widget.coffee.flavour, style: TextStyle(fontSize: 12, color: customColors?.textColor,)),
           ],),
         ],
       ),

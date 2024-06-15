@@ -1,9 +1,10 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
-import 'package:coffee_shop_app/ui/components/header_text.dart';
+import 'package:coffee_shop_app/data/providers/theme_provider.dart';
 import 'package:coffee_shop_app/ui/components/my_appbar.dart';
 import 'package:coffee_shop_app/ui/components/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -42,8 +43,9 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
                     ),),
-                    const Text('Yay for coffee!☕️', style: TextStyle(
-                      fontSize: 16
+                    Text('Yay for coffee!☕️', style: TextStyle(
+                      fontSize: 16,
+                      color: customColors?.textColor
                     ),)
                   ],),
                   Container(
@@ -89,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                             Text('BONUS REWARDS', style: TextStyle(
-                              color: customColors?.background,
+                              color: customColors?.textColor,
                               fontSize: 12
                             ),),
                             const SizedBox(height: 5,),
@@ -104,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                           width: MediaQuery.of(context).size.width,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: customColors?.white,
+                            color: Provider.of<ThemeProvider>(context).isDarkMode ? customColors?.black : customColors?.white,
                             borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(8),
                               bottomRight: Radius.circular(8)
@@ -146,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(12)),
                         child: Text(
                           'Shop now',
-                          style: TextStyle(color: customColors?.white),
+                          style: TextStyle(color: Provider.of<ThemeProvider>(context).isDarkMode ? customColors?.textColor : customColors?.white),
                         ),
                       ))
                   ),

@@ -1,3 +1,4 @@
+import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/ui/screens/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,12 +8,14 @@ class MyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customColors = Theme.of(context).extension<CustomColors>();
     return AppBar(
+      backgroundColor: customColors?.background,
       elevation: 5,
       leading: Builder(
         builder: (BuildContext context) {
           return IconButton(
-            icon: const Icon(Icons.menu),
+            icon: Icon(Icons.menu, color: customColors?.textColor,),
             iconSize: 35,
             onPressed: () {
               Scaffold.of(context).openDrawer();
@@ -33,7 +36,7 @@ class MyAppBar extends StatelessWidget {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const Cart()));
           },
           iconSize: 35,
-          icon: const Icon(Icons.shopping_bag_outlined),
+          icon: Icon(Icons.shopping_bag_outlined, color: customColors?.textColor,),
         ),
       ],
     );

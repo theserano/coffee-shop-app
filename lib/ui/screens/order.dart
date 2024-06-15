@@ -1,6 +1,7 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/data/models/drinks.dart';
 import 'package:coffee_shop_app/data/providers/shop.dart';
+import 'package:coffee_shop_app/data/providers/theme_provider.dart';
 import 'package:coffee_shop_app/ui/components/drink_tile.dart';
 import 'package:coffee_shop_app/ui/components/my_appbar.dart';
 import 'package:coffee_shop_app/ui/components/my_drawer.dart';
@@ -42,6 +43,7 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     final customColors = Theme.of(context).extension<CustomColors>();
     return Scaffold(
+      backgroundColor: customColors?.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(70),
         child:  MyAppBar(),
@@ -50,20 +52,21 @@ class _OrderPageState extends State<OrderPage> {
       body: Column(children: [
         Container(
           width: double.infinity,
-          color: customColors?.white,
+          color: Colors.transparent,
           padding: const EdgeInsets.only(top: 50, left: 10),
-          child: const Text(
+          child: Text(
             'Drinks',
             style: TextStyle(
               fontSize: 23,
               fontWeight: FontWeight.bold,
+              color: customColors?.textColor
             ),
           ),
         ),
         const SizedBox(height: 20,),
         Expanded(
           child: Container(
-            color: customColors?.white,
+            color: Colors.transparent,
             child: Consumer<Shop>(
               builder: (context, shop, child) => getShopMenu(shop.menu),
             ),

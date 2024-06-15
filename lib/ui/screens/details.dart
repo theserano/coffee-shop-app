@@ -2,9 +2,11 @@ import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/data/models/coffee_order.dart';
 import 'package:coffee_shop_app/data/models/drinks.dart';
 import 'package:coffee_shop_app/data/providers/coffee_order.dart';
+import 'package:coffee_shop_app/data/providers/theme_provider.dart';
 import 'package:coffee_shop_app/ui/components/bottom_nav.dart';
 import 'package:coffee_shop_app/ui/components/dropdown_button.dart';
 import 'package:coffee_shop_app/ui/components/number_value.dart';
+import 'package:coffee_shop_app/ui/screens/cart.dart';
 import 'package:coffee_shop_app/ui/screens/order.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -65,12 +67,6 @@ class _DetailsState extends State<Details> {
                 flavour: stateFlavourAmount,
               ));
         });
-        if (kDebugMode) {
-          print(stateCupSize);
-          print(stateAddIn);
-          print(stateSweetenerAmount);
-          print(stateFlavourAmount);
-        }
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const OrderPage()));
     } catch (e) {
@@ -85,12 +81,15 @@ class _DetailsState extends State<Details> {
   Widget build(BuildContext context) {
     final customColors = Theme.of(context).extension<CustomColors>();
     return Scaffold(
+      backgroundColor: Provider.of<ThemeProvider>(context, listen: false)
+          .isDarkMode ? customColors?.black : customColors?.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
         child: AppBar(
+          backgroundColor: customColors?.background,
           elevation: 5,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_outlined),
+            icon: Icon(Icons.arrow_back_ios_new_outlined, color: customColors?.textColor,),
             iconSize: 23,
             onPressed: () {
               Navigator.push(
@@ -110,9 +109,11 @@ class _DetailsState extends State<Details> {
               width: MediaQuery.of(context).size.width / 3.2,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Cart()));
+              },
               iconSize: 35,
-              icon: const Icon(Icons.shopping_bag_outlined),
+              icon: Icon(Icons.shopping_bag_outlined, color: customColors?.textColor,),
             ),
           ],
         ),
@@ -185,7 +186,7 @@ class _DetailsState extends State<Details> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Add to cart', style: TextStyle(fontSize: 21, color: customColors?.white, fontWeight: FontWeight.w400),),
+                        Text('Add to cart', style: TextStyle(fontSize: 21, color: Provider.of<ThemeProvider>(context).isDarkMode ? customColors?.textColor : customColors?.white, fontWeight: FontWeight.w400),),
                       ],
                     ),
                   )),

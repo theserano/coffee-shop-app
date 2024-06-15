@@ -18,7 +18,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isObscure = false;
@@ -27,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   void login() async{
     try {
       await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+          .signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const BottomNav()));
     } on FirebaseAuthException catch (e) {
@@ -118,15 +117,15 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         // username
                         Text(
-                          'Username',
+                          'Email Address',
                           style: TextStyle(color: customColors?.green),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         MyTextfield(
-                            controller: usernameController,
-                            hintText: 'Enter username',
+                            controller: emailController,
+                            hintText: 'Enter email',
                             obscureText: false),
 
                         const SizedBox(
@@ -163,6 +162,10 @@ class _LoginPageState extends State<LoginPage> {
                         // register button
                         MyButton(
                             onTap: () {
+                              setState(() {
+                                email = emailController.text;
+                                password = passwordController.text;
+                              });
                               login();
                             },
                             text: 'Login',),

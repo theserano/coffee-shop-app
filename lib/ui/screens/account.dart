@@ -77,6 +77,7 @@ class _AccountPageState extends State<AccountPage> {
                   'Dark Mode'),
                 const Spacer(),
                 CupertinoSwitch(
+                  trackColor: customColors?.white,
                   value: Provider.of<ThemeProvider>(context, listen: false)
                       .isDarkMode,
                   onChanged: (value) {
@@ -95,6 +96,7 @@ class _AccountPageState extends State<AccountPage> {
                   '2- factor authentication'),
                 const Spacer(),
                 CupertinoSwitch(
+                  trackColor: customColors?.white,
                   value: stateTwo,
                   onChanged: (value) {
                     setState(() {
@@ -113,6 +115,7 @@ class _AccountPageState extends State<AccountPage> {
                   'FACE ID'),
                 const Spacer(),
                 CupertinoSwitch(
+                  trackColor: customColors?.white,
                   value: stateThree,
                   onChanged: (value) {
                     setState(() {
@@ -131,6 +134,7 @@ class _AccountPageState extends State<AccountPage> {
                   'Password Lock'),
                 const Spacer(),
                 CupertinoSwitch(
+                  trackColor: customColors?.white,
                   value: stateFour,
                   onChanged: (value) {
                     setState(() {

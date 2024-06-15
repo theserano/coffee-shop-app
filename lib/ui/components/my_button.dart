@@ -1,5 +1,7 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
+import 'package:coffee_shop_app/data/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
@@ -23,7 +25,9 @@ class MyButton extends StatelessWidget {
             text,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: customColors?.background,
+                color: Provider.of<ThemeProvider>(context).isDarkMode
+                    ? customColors?.textColor
+                    : customColors?.white,
                 fontSize: 16),
           ),
         ),

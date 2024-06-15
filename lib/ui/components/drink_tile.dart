@@ -1,6 +1,8 @@
 import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:coffee_shop_app/data/models/drinks.dart';
+import 'package:coffee_shop_app/data/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class DrinkTile extends StatelessWidget {
@@ -20,16 +22,16 @@ class DrinkTile extends StatelessWidget {
           width: 80.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: customColors?.background,
+            color: Provider.of<ThemeProvider>(context).isDarkMode ? customColors?.black : customColors?.background,
           ),
           child: Column(
             children: [
               Opacity(
-                opacity: 0.8,
+                opacity: Provider.of<ThemeProvider>(context).isDarkMode ? 0.7 : 0.8,
                 child: Image.asset(drink.imagePath, fit: BoxFit.cover, width: 100.0,)
               ),
               const Spacer(),
-              Text(drink.name, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),),
+              Text(drink.name, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: customColors?.textColor ),),
               const SizedBox(height: 10.0,)
             ],
           ),

@@ -1,3 +1,4 @@
+import 'package:coffee_shop_app/core/themes/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class NumberValue extends StatefulWidget {
@@ -54,6 +55,7 @@ class _NumberValueState extends State<NumberValue> {
 
   @override
   Widget build(BuildContext context) {
+    final customColors = Theme.of(context).extension<CustomColors>();
     return Container(
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20.0),
       child: Column(
@@ -63,7 +65,7 @@ class _NumberValueState extends State<NumberValue> {
             padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 20.0),
             child: Text(
               widget.label,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: customColors?.textColor),
             ),
           ),
           Container(
